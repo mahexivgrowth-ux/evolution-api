@@ -23,7 +23,7 @@ COPY ./manager ./manager
 COPY ./runWithProvider.js ./
 
 COPY ./Docker ./Docker
-
+COPY ./.env ./.env
 RUN chmod +x ./Docker/scripts/* && dos2unix ./Docker/scripts/*
 
 RUN ./Docker/scripts/generate_database.sh
@@ -51,7 +51,7 @@ COPY --from=builder /evolution/public ./public
 COPY --from=builder /evolution/Docker ./Docker
 COPY --from=builder /evolution/runWithProvider.js ./runWithProvider.js
 COPY --from=builder /evolution/tsup.config.ts ./tsup.config.ts
-
+COPY --from=builder /evolution/.env ./.env
 ENV DOCKER_ENV=true
 
 EXPOSE 8080
